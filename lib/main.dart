@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:venta/add_user.dart';
 
 void main() {runApp(MyApp());}
 
@@ -26,8 +27,18 @@ class MyHomePage  extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar:AppBar(
-        title: Text(title)
-      )
+        title: Text(title),
+        actions: <Widget>[
+          IconButton(
+            icon:Icon(
+              Icons.add,
+              color: Colors.white,
+            ), onPressed: () {
+              Navigator.of(context).push(PageRouteBuilder(pageBuilder: (_,__,___)=>AddUser(title: 'Agregar usuario')));
+              },
+          )
+        ],
+      ),
     );
   }
 }  
