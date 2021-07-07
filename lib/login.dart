@@ -47,20 +47,36 @@ class MyCustomFormState extends State<MyCustomForm> {
             style: TextStyle(fontSize: 70))
         ),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           child: TextFormField(
+            keyboardType:TextInputType.text,
+            style: TextStyle(fontSize: 19),
             decoration: InputDecoration(
-              border: UnderlineInputBorder(),
-              labelText: 'Ingresa tu usuario',
+              labelText: "Ingrese su usuario",
+              prefixIcon: Icon(Icons.person),
+              border:OutlineInputBorder(
+                borderRadius: BorderRadius.circular(25.0),
+                borderSide: BorderSide(
+                )
+              )
+
             ),
           ),
         ),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           child: TextFormField(
+            keyboardType:TextInputType.pa,
+            style: TextStyle(fontSize: 19),
             decoration: InputDecoration(
-              border: UnderlineInputBorder(),
-              labelText: 'Ingresa tu contraseña',
+                labelText: "Ingrese su Contraseña",
+                prefixIcon: Icon(Icons.password),
+                border:OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(25.0),
+                    borderSide: BorderSide(
+                    )
+                )
+
             ),
           ),
         ),
