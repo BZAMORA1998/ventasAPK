@@ -9,7 +9,20 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: appTitle,
       home: Scaffold(
-        body: MyCustomForm(),
+        body: Container(
+          child:Center(
+                    child: SizedBox(
+                        width: 300 ,
+                        child: Row(
+                          children:[
+                            Expanded(
+                                child:MyCustomForm()
+                            )
+                          ]
+                        )
+                    ),
+          )
+        ),
       ),
     );
   }
@@ -26,14 +39,19 @@ class MyCustomFormState extends State<MyCustomForm> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-          child: TextField(
+          child: Text("Login",
+            style: TextStyle(fontSize: 70))
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          child: TextFormField(
             decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Enter a search term',
+              border: UnderlineInputBorder(),
+              labelText: 'Ingresa tu usuario',
             ),
           ),
         ),
@@ -42,10 +60,17 @@ class MyCustomFormState extends State<MyCustomForm> {
           child: TextFormField(
             decoration: InputDecoration(
               border: UnderlineInputBorder(),
-              labelText: 'Enter your username',
+              labelText: 'Ingresa tu contraseña',
             ),
           ),
         ),
+        TextButton(
+          style: ButtonStyle(
+            foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+          ),
+          onPressed: () { },
+          child: Text('Iniciar Sesión'),
+        )
       ],
     );
   }
