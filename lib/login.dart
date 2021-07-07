@@ -1,29 +1,52 @@
 import 'package:flutter/material.dart';
 
-void main() =>runApp(Main());
+void main() => runApp(MyApp());
 
-class Main extends StatelessWidget {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // Scaffold is a layout for
-    // the major Material Components.
+    final appTitle = 'Ventas';
     return MaterialApp(
-      home: Login()
+      title: appTitle,
+      home: Scaffold(
+        body: MyCustomForm(),
+      ),
     );
   }
 }
 
-class Login extends StatelessWidget {
-  Login();
+class MyCustomForm extends StatefulWidget {
+  @override
+  MyCustomFormState createState() {
+    return MyCustomFormState();
+  }
+}
 
+class MyCustomFormState extends State<MyCustomForm> {
   @override
   Widget build(BuildContext context) {
-    // Scaffold is a layout for
-    // the major Material Components.
-    return Scaffold(
-        body: Center(
-            child: Text('Hello World')
-        )
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          child: TextField(
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: 'Enter a search term',
+            ),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          child: TextFormField(
+            decoration: InputDecoration(
+              border: UnderlineInputBorder(),
+              labelText: 'Enter your username',
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
