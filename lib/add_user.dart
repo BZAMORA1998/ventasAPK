@@ -32,7 +32,31 @@ class AddUser  extends StatelessWidget{
             ), onPressed: () {  },
           )
         ],
-      ),
+
+      ),body: MyStatefulWidget(),
+    );
+  }
+}
+
+/// This is the stateful widget that the main application instantiates.
+class MyStatefulWidget extends StatefulWidget {
+  const MyStatefulWidget({Key? key}) : super(key: key);
+
+  @override
+  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
+}
+
+/// This is the private State class that goes with MyStatefulWidget.
+class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+
+      ],
     );
   }
 }
