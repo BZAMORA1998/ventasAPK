@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:venta/services/autenticacion.dart';
+import 'package:venta/services/Autenticacion.dart';
 
 void main() => runApp(MyApp());
 
@@ -99,7 +99,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             color: Colors.blue,
             child:Text("Iniciar Sesión", style: TextStyle(fontSize: 20,color: Colors.white)),
             onPressed: () {
-              getData();
+              postAutenticacion(this.strUsuario.text,this.strPassword.text);
             },
 
           ),
@@ -108,8 +108,8 @@ class MyCustomFormState extends State<MyCustomForm> {
     );
   }
 
-  getData() async {
-    var id = await this._autenticacion.postAutenticacion();
+  postAutenticacion(String strUsuario,String strPassword) async {
+    var id = await this._autenticacion.postAutenticacion(strUsuario,strPassword);
     print(id);
   }
 }
