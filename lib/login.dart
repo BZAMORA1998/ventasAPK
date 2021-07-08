@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:venta/services/autenticacion.dart';
 
 void main() => runApp(MyApp());
 
@@ -7,6 +8,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final appTitle = 'Ventas';
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: appTitle,
       home: Scaffold(
         body: Container(
@@ -36,6 +38,10 @@ class MyCustomForm extends StatefulWidget {
 }
 
 class MyCustomFormState extends State<MyCustomForm> {
+  var strUsuario=TextEditingController();
+  var strPassword=TextEditingController();
+  Autenticacion _autenticacion=new Autenticacion();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -43,8 +49,11 @@ class MyCustomFormState extends State<MyCustomForm> {
       children: <Widget>[
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-          child: Text("Login",
-            style: TextStyle(fontSize: 70))
+          child: Text("Sistema de Ventas",style: TextStyle(fontSize: 30,color: Colors.blue))
+        ),
+        Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+            child: Text("Inicie Sesión",style: TextStyle(fontSize: 30,color: Colors.blue))
         ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
@@ -61,12 +70,13 @@ class MyCustomFormState extends State<MyCustomForm> {
               )
 
             ),
+            controller: strUsuario,
           ),
         ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           child: TextFormField(
-            keyboardType:TextInputType.pa,
+            keyboardType:TextInputType.text,
             style: TextStyle(fontSize: 19),
             decoration: InputDecoration(
                 labelText: "Ingrese su Contraseña",
@@ -78,16 +88,28 @@ class MyCustomFormState extends State<MyCustomForm> {
                 )
 
             ),
+            controller: strPassword,
           ),
         ),
-        TextButton(
-          style: ButtonStyle(
-            foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          child: MaterialButton(
+            minWidth: 300,
+            height: 60,
+            color: Colors.blue,
+            child:Text("Iniciar Sesión", style: TextStyle(fontSize: 20,color: Colors.white)),
+            onPressed: () {
+              getData();
+            },
+
           ),
-          onPressed: () { },
-          child: Text('Iniciar Sesión'),
-        )
+        ),
       ],
     );
+  }
+
+  getData() async {
+    var id = await this._autenticacion.postAutenticacion();
+    print(id);
   }
 }
