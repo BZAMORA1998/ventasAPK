@@ -6,10 +6,6 @@ import 'package:http/http.dart' as http;
 class Autenticacion{
   Url _url=new Url();
 
-  Autenticacion(){
-
-  }
-
   /**
    *Usuario inicia sesion
    *

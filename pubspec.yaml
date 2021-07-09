@@ -34,8 +34,5 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-environment_config:
-  urlSpring: "https://sistemas-seguridad-api.herokuapp.com/ventas/v1"
-
 flutter:
   uses-material-design: true
