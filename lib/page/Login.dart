@@ -110,6 +110,8 @@ class MyCustomFormState extends State<MyCustomForm> {
                   context,
                   MaterialPageRoute(builder: (context) => Home()),
                 );
+              }else{
+                _showMyDialog(data['message']);
               }
             },
 
@@ -123,5 +125,32 @@ class MyCustomFormState extends State<MyCustomForm> {
     // var json = await this._autenticacion.postAutenticacion(strUsuario,strPassword);
     // Map<String, dynamic> data = jsonDecode(json);
     // print(data['data']);
+  }
+
+  Future<void> _showMyDialog(String strMessage) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Alerta'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(strMessage),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('cerrar'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
