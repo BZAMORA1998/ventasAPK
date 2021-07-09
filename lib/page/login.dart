@@ -3,11 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:venta/services/autenticacion.dart';
 
-import 'Home.dart';
+import 'home.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
+class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appTitle = 'Ventas';
@@ -22,7 +20,7 @@ class MyApp extends StatelessWidget {
                         child: Row(
                           children:[
                             Expanded(
-                                child:MyCustomForm()
+                                child:LoginForm()
                             )
                           ]
                         )
@@ -34,14 +32,14 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyCustomForm extends StatefulWidget {
+class LoginForm extends StatefulWidget {
   @override
-  MyCustomFormState createState() {
-    return MyCustomFormState();
+  LoginFormState createState() {
+    return LoginFormState();
   }
 }
 
-class MyCustomFormState extends State<MyCustomForm> {
+class LoginFormState extends State<LoginForm> {
   var strUsuario=TextEditingController();
   var strPassword=TextEditingController();
   Autenticacion _autenticacion=new Autenticacion();
