@@ -104,10 +104,7 @@ class LoginFormState extends State<LoginForm> {
               var json = await this._autenticacion.postAutenticacion(strUsuario.text,strPassword.text);
               Map<String, dynamic> data = jsonDecode(json);
               if(data['code'] as int ==200){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Home()),
-                );
+                Navigator.push( context,MaterialPageRoute(builder: (context) => Home()),);
               }else{
                 _showMyDialog(data['message']);
               }
@@ -117,12 +114,6 @@ class LoginFormState extends State<LoginForm> {
         ),
       ],
     );
-  }
-
-  postAutenticacion(String strUsuario,String strPassword) async {
-    // var json = await this._autenticacion.postAutenticacion(strUsuario,strPassword);
-    // Map<String, dynamic> data = jsonDecode(json);
-    // print(data['data']);
   }
 
   Future<void> _showMyDialog(String strMessage) async {

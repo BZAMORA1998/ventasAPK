@@ -18,7 +18,7 @@ class Autenticacion{
     Codec<String, String> stringToBase64Url = utf8.fuse(base64Url);
     String encoded = stringToBase64Url.encode(credentials);
     final response =
-    await http.post(Uri.parse(_url.SEGURIDAD+'autenticacion/login'),
+    await http.post(Uri.parse(_url.SEGURIDAD+'/autenticacion/login'),
       headers: <String, String>{
         'Authorization': "Basic "+encoded,
       },
