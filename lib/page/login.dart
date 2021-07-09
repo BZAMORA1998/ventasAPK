@@ -14,19 +14,10 @@ class Login extends StatelessWidget {
       title: appTitle,
       home: Scaffold(
         body: Container(
-          child:Center(
-                    child: SizedBox(
-                        width: 300 ,
-                        child: Row(
-                          children:[
-                            Expanded(
-                                child:LoginForm()
-                            )
-                          ]
-                        )
-                    ),
-          )
-        ),
+            child: Center(
+          child: SizedBox(
+              width: 300, child: Row(children: [Expanded(child: LoginForm())])),
+        )),
       ),
     );
   }
@@ -40,9 +31,9 @@ class LoginForm extends StatefulWidget {
 }
 
 class LoginFormState extends State<LoginForm> {
-  var strUsuario=TextEditingController();
-  var strPassword=TextEditingController();
-  Autenticacion _autenticacion=new Autenticacion();
+  var strUsuario = TextEditingController();
+  var strPassword = TextEditingController();
+  Autenticacion _autenticacion = new Autenticacion();
 
   @override
   Widget build(BuildContext context) {
@@ -50,46 +41,38 @@ class LoginFormState extends State<LoginForm> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-          child: Text("Sistema de Ventas",style: TextStyle(fontSize: 30,color: Colors.blue))
-        ),
+            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+            child: Text("Sistema de Ventas",
+                style: TextStyle(fontSize: 30, color: Colors.blue))),
         Padding(
             padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-            child: Text("Inicie Sesión",style: TextStyle(fontSize: 30,color: Colors.blue))
-        ),
+            child: Text("Inicie Sesión",
+                style: TextStyle(fontSize: 30, color: Colors.blue))),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           child: TextFormField(
-            keyboardType:TextInputType.text,
+            keyboardType: TextInputType.text,
             style: TextStyle(fontSize: 19),
             decoration: InputDecoration(
-              labelText: "Ingrese su usuario",
-              prefixIcon: Icon(Icons.person),
-              border:OutlineInputBorder(
-                borderRadius: BorderRadius.circular(25.0),
-                borderSide: BorderSide(
-                )
-              )
-
-            ),
+                labelText: "Ingrese su usuario",
+                prefixIcon: Icon(Icons.person),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(25.0),
+                    borderSide: BorderSide())),
             controller: strUsuario,
           ),
         ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           child: TextFormField(
-            keyboardType:TextInputType.text,
+            keyboardType: TextInputType.text,
             style: TextStyle(fontSize: 19),
             decoration: InputDecoration(
                 labelText: "Ingrese su Contraseña",
                 prefixIcon: Icon(Icons.password),
-                border:OutlineInputBorder(
+                border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(25.0),
-                    borderSide: BorderSide(
-                    )
-                )
-
-            ),
+                    borderSide: BorderSide())),
             controller: strPassword,
           ),
         ),
@@ -99,17 +82,22 @@ class LoginFormState extends State<LoginForm> {
             minWidth: 300,
             height: 60,
             color: Colors.blue,
-            child:Text("Iniciar Sesión", style: TextStyle(fontSize: 20,color: Colors.white)),
+            child: Text("Iniciar Sesión",
+                style: TextStyle(fontSize: 20, color: Colors.white)),
             onPressed: () async {
-              var json = await this._autenticacion.postAutenticacion(strUsuario.text,strPassword.text);
+              var json = await this
+                  ._autenticacion
+                  .postAutenticacion(strUsuario.text, strPassword.text);
               Map<String, dynamic> data = jsonDecode(json);
-              if(data['code'] as int ==200){
-                Navigator.push( context,MaterialPageRoute(builder: (context) => Home()),);
-              }else{
+              if (data['code'] as int == 200) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Home()),
+                );
+              } else {
                 _showMyDialog(data['message']);
               }
             },
-
           ),
         ),
       ],
