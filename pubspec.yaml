@@ -31,18 +31,16 @@ dependencies:
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
+  flutter_launcher_icons: "^0.8.0"
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons:
 
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/ventas.svg"
-  adaptive_icon_background: "assets/ventas.svg"
+  image_path: "assets/ventas.png"
 
 flutter:
   uses-material-design: true
-
-assets:
-  - assets/ventas.svg
+  assets:
+    - assets/ventas.png
