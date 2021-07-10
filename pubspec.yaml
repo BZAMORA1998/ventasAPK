@@ -22,6 +22,7 @@ environment:
 
 dependencies:
   http:
+  loading_gifs:
   flutter:
     sdk: flutter
 
@@ -44,3 +45,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets/ventas.png
+    - assets/loading.gif
