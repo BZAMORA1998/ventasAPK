@@ -15,13 +15,31 @@ class Login extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: appTitle,
       home: Scaffold(
-        body: Container(
-            margin: const EdgeInsets.only(top:100),
-            child: Center(
-          child: SizedBox(
-              width: 300, child: Row(children: [Expanded(child: LoginForm())])),
-        )),
-      ),
+          body: Container(
+            color: Colors.blue,
+            child: Column(
+                children:<Widget>
+                             [  Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 0, vertical: 60),
+                              child:Image(
+                                  image: AssetImage('assets/ventas.png'),
+                                  width: 100,
+                                  height: 100,
+                                )
+                               ),
+                              Expanded(
+                                  child: Card(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.only(topLeft: Radius.circular(20),
+                                              topRight: Radius.circular(20))),
+                                      color: Colors.white,
+                                      child: LoginForm()
+                                  )
+                              ),
+                        ]
+                    ),
+            )
+      )
     );
   }
 }
@@ -53,30 +71,22 @@ class LoginFormState extends State<LoginForm> {
                   key: _formKey,
                   child: ListView (
                       children: <Widget>[
-
-                        Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-                              child: Image(
-                                image: AssetImage('assets/ventas.png'),
-                                width: 100,
-                                height: 100,
-                                )
-
+                        Container(
+                          margin: const EdgeInsets.only(top: 50.0),
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text("¡Bienvenido!",
+                                    style: TextStyle(fontSize: 20, color: Colors.blue))),
                         ),
-                        Align(
-                        alignment: Alignment.center,
-                        child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 0, vertical: 10),
-
-                            child: Text("Bienvenido",
-                                style: TextStyle(fontSize: 20, color: Colors.blue))),
-                        ),
-                        Align(
-                        alignment: Alignment.center,
-                        child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 0, vertical: 6),
-                            child: Text("Inicie Sesión",
-                                style: TextStyle(fontSize: 20, color: Colors.blue)))
+                        Container(
+                        margin: new EdgeInsets.symmetric(vertical: 10.0),
+                        child: Align(
+                                    alignment: Alignment.center,
+                                    child: Padding(
+                                        padding: EdgeInsets.symmetric(horizontal: 0, vertical: 6),
+                                        child: Text("Inicie Sesión",
+                                            style: TextStyle(fontSize: 20, color: Colors.blue)))
+                                    )
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),

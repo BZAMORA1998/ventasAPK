@@ -5,11 +5,15 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Home")
-      ),
-      body: null
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: "Home",
+        home:Scaffold(
+          appBar: AppBar(
+              title: Text("Home")
+          ),
+          body: null
+        )
     );
   }
 
