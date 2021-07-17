@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:venta/page/login.dart';
 
 class Home extends StatelessWidget {
 
@@ -10,7 +11,16 @@ class Home extends StatelessWidget {
         title: "Home",
         home:Scaffold(
           appBar: AppBar(
-              title: Text("Home")
+            title: Text('Home'),
+            leading: IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Login()),
+                );
+              },
+              icon: Icon(Icons.keyboard_backspace ),
+            )
           ),
           body: null
         )
