@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -33,8 +34,6 @@ class LoginForm extends StatefulWidget {
 
 class LoginFormState extends State<LoginForm> {
   Autenticacion _autenticacion = new Autenticacion();
-  DialogAlert _dialogAlert=new DialogAlert();
-  Loading _loading=new Loading();
   final   _formKey=GlobalKey<FormState>();
 
   var strUsuario = TextEditingController();
@@ -133,19 +132,22 @@ class LoginFormState extends State<LoginForm> {
                                                height: 50.0,
                                                child: ElevatedButton(
                                                  onPressed: ()  async {
+                                                   Loading _loading=new Loading(context);
+                                                   DialogAlert _dialogAlert =new DialogAlert(context);
                                                    if(_formKey.currentState!.validate()) {
-                                                     _loading.showLoading(context,true);
+                                                     _loading.show();
+
                                                      var json = await postAutenticacion(strUsuario.text, strPassword.text);
                                                      Map<String, dynamic> data = jsonDecode(json);
                                                      if (data['code'] as int == 200) {
-                                                       _loading.showLoading(context,false);
-                                                       Navigator.push(
-                                                         context,
-                                                         MaterialPageRoute(builder: (context) => Home()),
-                                                       );
+                                                       _loading.close();
+                                                         Navigator.push(
+                                                           context,
+                                                           MaterialPageRoute(builder: (context) => Home()),
+                                                         );
                                                      } else {
-                                                       _loading.showLoading(context,false);
-                                                       _dialogAlert.showAlertDialog(context,data['message']);
+                                                       _loading.close();
+                                                       _dialogAlert.show(data['message']);
                                                      }
                                                    }
                                                  },

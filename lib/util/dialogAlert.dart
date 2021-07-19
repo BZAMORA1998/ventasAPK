@@ -1,41 +1,74 @@
-/// Flutter code sample for AlertDialog
+// /// Flutter code sample for AlertDialog
+//
+// // This demo shows a [TextButton] which when pressed, calls [showDialog]. When called, this method
+// // displays a Material dialog above the current contents of the app and returns
+// // a [Future] that completes when the dialog is dismissed.
+//
+// import 'package:flutter/material.dart';
+//
+// /// This is the stateless widget that the main application instantiates.
+// class DialogAlert extends StatelessWidget {
+//
+//   String descripcion;
+//   DialogAlert({Key? key,required this.descripcion}) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return AlertDialog(
+//           title: const Text('Alerta'),
+//           content: Text(this.descripcion),
+//           actions: <Widget>[
+//             TextButton(
+//               onPressed: () => Navigator.of(context).pop(),
+//               child: const Text('Cancelar'),
+//             ),
+//             TextButton(
+//               onPressed: () =>Navigator.of(context).pop(),
+//               child: const Text('OK'),
+//             ),
+//           ],
+//     );
+//   }
+// }
 
-// This demo shows a [TextButton] which when pressed, calls [showDialog]. When called, this method
-// displays a Material dialog above the current contents of the app and returns
-// a [Future] that completes when the dialog is dismissed.
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-/// This is the main application widget.
 class DialogAlert {
 
-  /**
-   * Muestra la advertencia sobre un error 400
-   *
-   * @author Bryan Zamora
-   * @param context
-   * @param @strMessage
-   */
-  showAlertDialog(BuildContext context,String strMessage) {
+  final BuildContext _context;
 
-    AlertDialog alert = AlertDialog(
-                            title: const Text('Alerta'),
-                            content: Text(strMessage),
-                            actions: <Widget>[
-                                          TextButton(
-                                          onPressed: () => Navigator.pop(context, 'Cancelar'),
-                                          child: const Text('Cancelar'),
-                                          ),
-                                          TextButton(
-                                          onPressed: () => Navigator.pop(context, 'OK'),
-                                          child: const Text('OK'),
-                                                          ),
-                                          ]
-                              );
-    // show the dialog
+  DialogAlert(this._context);
+
+
+  /// Abrir carga
+  void show(String descripcion) {
     showDialog(
-      context: context,
-      builder: (BuildContext context) =>alert
+      context: _context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Alerta'),
+          content: Text(descripcion),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => close(),
+              child: const Text('Cancelar'),
+            ),
+            TextButton(
+              onPressed: () => close(),
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      }
     );
   }
+
+  /// Cerrar carga
+  void close() {
+    Navigator.of(_context).pop();
+  }
 }
+
+

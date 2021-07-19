@@ -3,8 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:venta/page/login.dart';
 import 'package:venta/services/modulosService.dart';
-import 'package:venta/util/alert.dart';
-import 'package:venta/util/dialogAlert.dart';
+import 'package:venta/util/CardAlert.dart';
 
 class Home extends StatelessWidget {
   @override
@@ -54,7 +53,6 @@ class ModuloFormState extends State<ModuloForm> {
     return FutureBuilder(
         future: getModulos(),
         builder: (context, snapshot) {
-
           if (snapshot.hasData == ConnectionState.waiting) {
             return Center(child: Text('Espere por favor...'));
           } else {
@@ -75,7 +73,7 @@ class ModuloFormState extends State<ModuloForm> {
                   children: children,
                 );
               } else if (data['code'] as int == 400) {
-                return Text(data['message']);
+                return  CardAlert(descripcion: data['message']);
               } else {
                 return Text("");
               }
@@ -84,6 +82,7 @@ class ModuloFormState extends State<ModuloForm> {
         });
   }
 }
+
 
 class ItemModuloForm extends StatefulWidget {
   final String nombre;
