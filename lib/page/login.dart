@@ -181,6 +181,13 @@ class LoginFormState extends State<LoginForm> {
     );
   }
 
+  /**
+   * Inicia sesion
+   *
+   * @author Bryan Zamora
+   * @param strUsuario
+   * @param strPassword
+   */
   postAutenticacion(String strUsuario,String strPassword) async {
     return await this
         ._autenticacion
