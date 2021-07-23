@@ -16,10 +16,11 @@ class Home extends StatelessWidget {
                 title: Text('Home'),
                 leading: IconButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Login()),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(builder: (context) => Login()),
+                    // );
+                    Navigator.pop(context);
                   },
                   icon: Icon(Icons.keyboard_backspace),
                 )),

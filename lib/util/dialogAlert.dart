@@ -52,22 +52,17 @@ class DialogAlert {
           content: Text(descripcion),
           actions: <Widget>[
             TextButton(
-              onPressed: () => close(),
+              onPressed: () { Navigator.of(context).pop(true); },
               child: const Text('Cancelar'),
             ),
             TextButton(
-              onPressed: () => close(),
+              onPressed: () { Navigator.of(context).pop(true); },
               child: const Text('OK'),
             ),
           ],
         );
       }
     );
-  }
-
-  /// Cerrar carga
-  void close() {
-    Navigator.of(_context).pop();
   }
 }
 
