@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:venta/page/login.dart';
+import 'package:venta/page/seguridad/usuarios.dart';
 import 'package:venta/services/modulosService.dart';
 import 'package:venta/util/CardAlert.dart';
 
@@ -106,7 +107,11 @@ class ItemModuloFormState extends State<ItemModuloForm> {
             padding: EdgeInsets.all(10.0),
             child: InkWell(
                 onTap: () {
-                  print("Container clicked");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => UsuariosForm()),
+                  );
                 },
                 child: Container(
                     width: 100,
@@ -146,3 +151,4 @@ class ItemModuloFormState extends State<ItemModuloForm> {
                     )))));
   }
 }
+
