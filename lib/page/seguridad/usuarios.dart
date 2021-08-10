@@ -39,6 +39,12 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title:  Text('Seguridad'),
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.arrow_back_rounded),
+              onPressed: () {
+            Navigator.pop(context);
+          }),
+        ],
       ),
       drawer: Drawer(
         child: ListView(
