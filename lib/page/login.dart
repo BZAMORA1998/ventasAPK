@@ -7,7 +7,7 @@ import 'package:venta/services/autenticacion.dart';
 import 'package:venta/util/dialogAlert.dart';
 import 'package:venta/util/loading.dart';
 
-import 'home.dart';
+import 'home/home.dart';
 
 class Login extends StatelessWidget {
 
