@@ -1,15 +1,15 @@
 import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:venta/page/home/seguridad/seguridad.dart';
 
 class Modulos extends StatefulWidget {
-
   @override
-  SeguridadState createState() => SeguridadState();
+  ModulosState createState() => ModulosState();
 }
 
-class SeguridadState extends State<Seguridad> {
+class ModulosState extends State<Modulos> {
   int _selectedDestination = 0;
 
   @override
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // Hide the debug banner
+        // Hide the debug banner
         debugShowCheckedModeBanner: false,
         title: 'Kindacode.com',
         theme: ThemeData(
@@ -50,35 +50,17 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body:Container(
-            child:
-            Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children:[
-                  SizedBox(
-                    width: 300.0,
-                    child: ListView(
-                      children: [
-                        PaginatedDataTable(
-                          source: _data,
-                          header: Text('My Products'),
-                          columns: [
-                            DataColumn(label: Text('ID')),
-                            DataColumn(label: Text('Name')),
-                            DataColumn(label: Text('Price'))
-                          ],
-                          columnSpacing: 100,
-                          horizontalMargin: 10,
-                          rowsPerPage: 8,
-                          showCheckboxColumn: true,
-                        ),
-                      ],
-                    ),
-                  ),
-                ]
-            )
-        )
-    );
+        body: Center(
+      child: RaisedButton(
+        child: Text('Launch screen'),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Seguridad()),
+          );
+        },
+      ),
+    ));
   }
 }
 
@@ -87,12 +69,11 @@ class MyData extends DataTableSource {
   // Generate some made-up data
   final List<Map<String, dynamic>> _data = List.generate(
       200,
-          (index) =>
-      {
-        "id": index,
-        "title": "Item $index",
-        "price": Random().nextInt(10000)
-      });
+      (index) => {
+            "id": index,
+            "title": "Item $index",
+            "price": Random().nextInt(10000)
+          });
 
   bool get isRowCountApproximate => false;
 

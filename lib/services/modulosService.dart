@@ -6,12 +6,12 @@ import 'package:http/http.dart' as http;
 
 import 'apiService.dart';
 
-class ModulosService{
-
-  ApiService _apiService=new ApiService();
+class ModulosService {
+  ApiService _apiService = new ApiService();
 
   dynamic getModulos() async {
-    final response = await _apiService.ApiCallSpring("GET","/modulos",null,null);
+    final response =
+        await _apiService.ApiCallSpring("GET", "/modulos", null, null);
     return response.body;
   }
 }
