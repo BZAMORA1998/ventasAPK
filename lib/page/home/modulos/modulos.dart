@@ -1,8 +1,9 @@
-import 'dart:math';
-
+import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:venta/page/home/seguridad/seguridad.dart';
+import 'package:venta/services/modulosService.dart';
+import 'package:venta/util/cardAlert.dart';
 
 class Modulos extends StatefulWidget {
   @override
@@ -17,75 +18,127 @@ class ModulosState extends State<Modulos> {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
 
-    return Scaffold(
-      body: MyApp(),
-    );
+    return Scaffold(body: ModuloForm());
   }
 }
 
-class MyApp extends StatelessWidget {
+class ModuloForm extends StatefulWidget {
+  @override
+  ModuloFormState createState() {
+    return ModuloFormState();
+  }
+}
+
+class ModuloFormState extends State<ModuloForm> {
+  ModulosService _modulosService = new ModulosService();
+  var json;
+
+  Future<void> getModulos() async {
+    json = await _modulosService.getModulos();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getModulos();
+  }
+
+  @override
+  build(BuildContext context) {
+    return FutureBuilder(
+        future: getModulos(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData == ConnectionState.waiting) {
+            return Center(child: Text('Espere por favor...'));
+          } else {
+            if (snapshot.hasError || json == null) {
+              return Text("");
+            } else {
+              Map<String, dynamic> data = jsonDecode(json);
+
+              if (data['code'] as int == 200) {
+                final children = <Widget>[];
+                data['data'].forEach((subItem) {
+                  children.add(new ItemModuloForm(
+                      nombre: subItem['nombre'], img: "assets/ventas.png"));
+                });
+
+                return ListView(
+                  padding: EdgeInsets.only(top: 40),
+                  children: children,
+                );
+              } else if (data['code'] as int == 400) {
+                return CardAlert(descripcion: data['message']);
+              } else {
+                return Text("");
+              }
+            }
+          }
+        });
+  }
+}
+
+class ItemModuloForm extends StatefulWidget {
+  final String nombre;
+  final String img;
+
+  const ItemModuloForm({Key? key, required this.nombre, required this.img})
+      : super(key: key);
+
+  @override
+  ItemModuloFormState createState() {
+    return ItemModuloFormState();
+  }
+}
+
+class ItemModuloFormState extends State<ItemModuloForm> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        // Hide the debug banner
-        debugShowCheckedModeBanner: false,
-        title: 'Kindacode.com',
-        theme: ThemeData(
-          primarySwatch: Colors.amber,
-        ),
-        home: HomeScreen());
-  }
-}
-
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
-
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  DataTableSource _data = MyData();
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: Center(
-      child: RaisedButton(
-        child: Text('Launch screen'),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Seguridad()),
-          );
-        },
-      ),
-    ));
-  }
-}
-
-// The "soruce" of the table
-class MyData extends DataTableSource {
-  // Generate some made-up data
-  final List<Map<String, dynamic>> _data = List.generate(
-      200,
-      (index) => {
-            "id": index,
-            "title": "Item $index",
-            "price": Random().nextInt(10000)
-          });
-
-  bool get isRowCountApproximate => false;
-
-  int get rowCount => _data.length;
-
-  int get selectedRowCount => 0;
-
-  DataRow getRow(int index) {
-    return DataRow(cells: [
-      DataCell(Text(_data[index]['id'].toString())),
-      DataCell(Text(_data[index]["title"])),
-      DataCell(Text(_data[index]["price"].toString())),
-    ]);
+    return Center(
+        child: Padding(
+            padding: EdgeInsets.all(10.0),
+            child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Seguridad()),
+                  );
+                },
+                child: Container(
+                    width: 100,
+                    height: 100,
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.blue,
+                          style: BorderStyle.solid,
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: ListView(
+                      children: [
+                        Container(
+                          height: 30,
+                          decoration: BoxDecoration(
+                            border: Border(
+                                bottom: BorderSide(
+                              color: Colors.blue,
+                              style: BorderStyle.solid,
+                              width: 1.0,
+                            )),
+                          ),
+                          child: Align(
+                              alignment: Alignment.center,
+                              child: Text(widget.nombre)),
+                        ),
+                        Center(
+                            child: Container(
+                                height: 70,
+                                child: Image(
+                                  image: AssetImage(widget.img),
+                                  width: 40,
+                                  height: 40,
+                                )))
+                      ],
+                    )))));
   }
 }
