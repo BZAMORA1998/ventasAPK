@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:venta/page/home/modulos/seguridad/seguridad.dart';
 
 import 'modulos/modulos.dart';
 
@@ -29,11 +30,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int index = 0;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
-
     return Scaffold(
         appBar: AppBar(
           title: Text('Home'),
@@ -63,14 +65,25 @@ class _MyHomePageState extends State<MyHomePage> {
               ListTile(
                 leading: Icon(Icons.home),
                 title: Text('Módulos'),
+                onTap: () {
+                  item(0);
+                },
               ),
               ListTile(
-                leading: Icon(Icons.shield),
-                title: Text('Seguridad'),
-              )
+                  leading: Icon(Icons.shield),
+                  title: Text('Seguridad'),
+                  onTap: () {
+                    item(1);
+                  })
             ],
           ),
         ),
-        body: Modulos());
+        body: Modulos(index: this.index));
+  }
+
+  item(index) {
+    setState(() {
+      this.index = index;
+    });
   }
 }

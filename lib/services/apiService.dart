@@ -14,7 +14,8 @@ class ApiService{
 
     }else{
       headers={
-        'Authorization': "Bearer "+await getToken()
+        'Authorization': "Bearer "+await getToken(),
+        'Accept-Language': 'es'
       };
     }
 

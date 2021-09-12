@@ -11,7 +11,8 @@ class ModulosService {
 
   dynamic getModulos() async {
     final response =
-        await _apiService.ApiCallSpring("GET", "/modulos", null, null);
+        await _apiService.ApiCallSpring("GET","/usuarios/modulos?incluirModulosNoParametrizados=false&secuenciaUsuario=0", null, null);
+    print(response.body);
     return response.body;
   }
 }

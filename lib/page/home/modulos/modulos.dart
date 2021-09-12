@@ -1,28 +1,52 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:venta/page/home/seguridad/seguridad.dart';
+import 'package:venta/page/home/modulos/seguridad/seguridad.dart';
 import 'package:venta/services/modulosService.dart';
 import 'package:venta/util/cardAlert.dart';
 
+int myIndex = 0;
+
 class Modulos extends StatefulWidget {
+  var index;
+  Modulos({Key? key, required this.index}) : super(key: key);
+
   @override
   ModulosState createState() => ModulosState();
 }
 
 class ModulosState extends State<Modulos> {
   int _selectedDestination = 0;
+  int index = 0;
+  bool isParent = true;
+  refresh() {
+    setState(() {
+      index = myIndex;
+      isParent = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    if (isParent == true) {
+      index = widget.index;
+    }
+
+    isParent = true;
+
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
 
-    return Scaffold(body: ModuloForm());
+    return Scaffold(
+        body: index == 0 ? ModuloForm(notifyParent: refresh) : Seguridad());
   }
 }
 
 class ModuloForm extends StatefulWidget {
+  final Function() notifyParent;
+
+  ModuloForm({Key? key, required this.notifyParent}) : super(key: key);
+
   @override
   ModuloFormState createState() {
     return ModuloFormState();
@@ -43,6 +67,12 @@ class ModuloFormState extends State<ModuloForm> {
     getModulos();
   }
 
+  refresh() {
+    setState(() {
+      widget.notifyParent();
+    });
+  }
+
   @override
   build(BuildContext context) {
     return FutureBuilder(
@@ -60,7 +90,9 @@ class ModuloFormState extends State<ModuloForm> {
                 final children = <Widget>[];
                 data['data'].forEach((subItem) {
                   children.add(new ItemModuloForm(
-                      nombre: subItem['nombre'], img: "assets/ventas.png"));
+                      nombre: subItem['nombre'],
+                      img: "assets/ventas.png",
+                      notifyParent: refresh));
                 });
 
                 return ListView(
@@ -81,8 +113,13 @@ class ModuloFormState extends State<ModuloForm> {
 class ItemModuloForm extends StatefulWidget {
   final String nombre;
   final String img;
+  final Function() notifyParent;
 
-  const ItemModuloForm({Key? key, required this.nombre, required this.img})
+  const ItemModuloForm(
+      {Key? key,
+      required this.nombre,
+      required this.img,
+      required Function() this.notifyParent})
       : super(key: key);
 
   @override
@@ -99,10 +136,10 @@ class ItemModuloFormState extends State<ItemModuloForm> {
             padding: EdgeInsets.all(10.0),
             child: InkWell(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Seguridad()),
-                  );
+                  setState(() {
+                    myIndex = 1;
+                  });
+                  widget.notifyParent();
                 },
                 child: Container(
                     width: 100,
